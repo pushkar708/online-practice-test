@@ -7,7 +7,7 @@ const Quiz = () => {
   const [score, setScore] = useState(0);
 
   useEffect(() => {
-    axios.get('/api/quiz/questions')
+    axios.get('http://localhost:5000/api/quiz/questions')
       .then(res => setQuestions(res.data))
       .catch(err => console.log(err));
   }, []);

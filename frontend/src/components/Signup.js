@@ -10,9 +10,8 @@ const Signup = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const newUser = { email, password };
-    axios.post('/api/users/signup', newUser)
+    axios.post('http://localhost:5000/api/users/signup', newUser)
       .then(res => {
-        console.log(res.data);
         navigate('/');
       })
       .catch(err => console.log(err));
@@ -26,6 +25,7 @@ const Signup = () => {
         <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" />
         <button type="submit">Signup</button>
       </form>
+      <a href="/">Already have an account? Sign In</a>
     </div>
   );
 };
