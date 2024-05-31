@@ -13,8 +13,10 @@ const Login = () => {
     const user = { email, password };
     axios.post('http://localhost:5000/api/users/login', user)
       .then(res => {
-        localStorage.setItem('jwtToken', res.data.token);
-        navigate('/dashboard');
+        const token = res.data.token;
+        localStorage.setItem('jwtToken', token);
+        const userRole = JSON.parse(atob(token.split('.')[1])).role;
+        navigate('/dashboard', { state: { userRole } });
       })
       .catch(err => {
         console.error(err);

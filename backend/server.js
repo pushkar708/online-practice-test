@@ -1,54 +1,28 @@
 const express = require('express');
-const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const users = require('./routes/users');
-const quiz = require('./routes/quiz');
-const keys = require('./config/keys'); // Make sure this file contains your MongoDB URI
+const quizRoutes = require('./routes/quizRoutes');
+const quizController = require('./controllers/quizController');
+const adminController = require('./controllers/adminController');
+const authController = require('./controllers/authController').router;
+const { verifyToken } = require('./controllers/authController');
 
 const app = express();
-
-// Middleware
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
 app.use(cors());
+app.use(express.json());
+app.use(bodyParser.json());
 
-// DB Config
-const db = keys.mongoURI;
+app.use(quizRoutes);
 
-// Connect to MongoDB
-mongoose.connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => console.log('MongoDB connected'))
-  .catch(err => console.log(err));
+app.use('/api/auth', authController);
+app.use('/api/quiz', verifyToken, quizRoutes);
 
-// Routes
-app.use('/api/users', users);
-app.use('/api/quiz', quiz);
+app.post('/api/quiz/start', verifyToken, quizController.startQuiz);
+app.get('/api/quiz/start', quizController.startQuiz);
+app.post('/api/quiz/submit', verifyToken, quizController.submitQuiz);
+app.use('/api/admin', verifyToken, adminController);
 
-// Get list of databases and collections
-app.get("/", async (req, res) => {
-  try {
-    const client = await mongoose.connection.getClient();
-    const adminDb = client.db().admin();
-
-    // Get list of databases
-    const dbs = await adminDb.listDatabases();
-
-    const databasesInfo = await Promise.all(dbs.databases.map(async (dbInfo) => {
-      const db = client.db(dbInfo.name);
-      const collections = await db.listCollections().toArray();
-      return {
-        name: dbInfo.name,
-        collections: collections.map(col => col.name)
-      };
-    }));
-
-    res.json(databasesInfo);
-  } catch (error) {
-    console.error(error);
-    res.status(500).send('Error retrieving databases and collections');
-  }
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });
-
-const port = process.env.PORT || 5000;
-app.listen(port, () => console.log(`Server running on port ${port}`));

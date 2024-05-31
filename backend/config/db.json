@@ -1,0 +1,93 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "email": "asd@asdd.com",
+      "password": "$2a$08$OtKQGQKhOkqt/Ys.sQ8cEuFbEHm6o/V/p5Q3TQIOSYdxVS1fuuEAe",
+      "role": "user",
+      "quizzes": [
+        {
+          "userId": 1,
+          "correctAnswers": 2,
+          "totalQuestions": 3,
+          "date": "2024-05-31T08:59:11.031Z"
+        },
+        {
+          "userId": 1,
+          "correctAnswers": 3,
+          "totalQuestions": 3,
+          "date": "2024-05-31T09:05:51.902Z"
+        },
+        {
+          "userId": 1,
+          "correctAnswers": 5,
+          "totalQuestions": 5,
+          "date": "2024-05-31T09:55:22.992Z"
+        },
+        {
+          "userId": 1,
+          "correctAnswers": 1,
+          "totalQuestions": 1,
+          "date": "2024-05-31T10:48:59.902Z"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "email": "admin@admin.com",
+      "password": "$2a$08$zHu2jXY91UrdcjmETC8cGODtP/jfBCNMx7sV437nCUoYaMdFSZFpW",
+      "role": "admin",
+      "quizzes": []
+    }
+  ],
+  "questions": [
+    {
+      "question": "Where is Delhi?",
+      "options": ["India", "China", "Africa", "USA"],
+      "correctAnswer": "India",
+      "tags": ["Geography"],
+      "difficulty": 1,
+      "id": 1
+    },
+    {
+      "question": "What is the capital of France?",
+      "options": ["Paris", "London", "Rome", "Berlin"],
+      "correctAnswer": "Paris",
+      "tags": ["Geography"],
+      "difficulty": 1,
+      "id": 2
+  },
+  {
+    "question": "Which planet is known as the Red Planet?",
+    "options": ["Mars", "Venus", "Jupiter", "Saturn"],
+    "correctAnswer": "Mars",
+    "tags": ["Science"],
+    "difficulty": 1,
+    "id": 3
+},
+{
+  "question": "Who wrote 'To Kill a Mockingbird'?",
+  "options": ["Harper Lee", "Mark Twain", "J.K. Rowling", "Ernest Hemingway"],
+  "correctAnswer": "Harper Lee",
+  "tags": ["Literature"],
+  "difficulty": 2,
+  "id": 4
+},{
+  "question": "What is the smallest prime number?",
+  "options": ["1", "2", "3", "5"],
+  "correctAnswer": "2",
+  "tags": ["Mathematics"],
+  "difficulty": 1,
+  "id": 5
+},{
+  "question": "Who was the first President of the United States?",
+  "options": ["George Washington", "Abraham Lincoln", "Thomas Jefferson", "John Adams"],
+  "correctAnswer": "George Washington",
+  "tags": ["History"],
+  "difficulty": 1,
+  "id": 6
+}
+
+  
+  ]
+}
