@@ -29,6 +29,36 @@
           "correctAnswers": 1,
           "totalQuestions": 1,
           "date": "2024-05-31T10:48:59.902Z"
+        },
+        {
+          "userId": 1,
+          "correctAnswers": 4,
+          "totalQuestions": 6,
+          "date": "2024-06-01T18:10:54.333Z"
+        },
+        {
+          "userId": 1,
+          "correctAnswers": 0,
+          "totalQuestions": 0,
+          "date": "2024-06-01T18:14:34.299Z"
+        },
+        {
+          "userId": 1,
+          "correctAnswers": 0,
+          "totalQuestions": 0,
+          "date": "2024-06-01T18:17:13.664Z"
+        },
+        {
+          "userId": 1,
+          "correctAnswers": 0,
+          "totalQuestions": 0,
+          "date": "2024-06-01T18:18:35.783Z"
+        },
+        {
+          "userId": 1,
+          "correctAnswers": 3,
+          "totalQuestions": 5,
+          "date": "2024-06-01T18:21:29.119Z"
         }
       ]
     },
@@ -75,7 +105,7 @@
       ],
       "correctAnswer": "Harper Lee",
       "tags": ["Literature"],
-      "difficulty": 2,
+      "difficulty": 1,
       "id": 4
     },
     {
@@ -96,7 +126,7 @@
       ],
       "correctAnswer": "George Washington",
       "tags": ["History"],
-      "difficulty": 1,
+      "difficulty": 2,
       "id": 6
     }
   ]

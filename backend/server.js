@@ -1,11 +1,18 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const mongoose = require('mongoose');
 const quizRoutes = require('./routes/quizRoutes');
 const quizController = require('./controllers/quizController');
 const adminController = require('./controllers/adminController');
 const authController = require('./controllers/authController').router;
 const { verifyToken } = require('./controllers/authController');
+const keys = require('./config/keys');
+
+const db = keys.mongoURI;
+mongoose.connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => console.log('MongoDB connected'))
+  .catch(err => console.log(err));
 
 const app = express();
 app.use(cors());

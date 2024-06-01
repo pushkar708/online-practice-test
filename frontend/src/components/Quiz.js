@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { jwtDecode } from 'jwt-decode';
+import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Quiz = () => {
+  const navigate = useNavigate();
   const [questions, setQuestions] = useState([]);
   const [answers, setAnswers] = useState({});
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -21,6 +24,12 @@ const Quiz = () => {
     }
   };
 
+  const handleSignout = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    navigate('/');
+  };
+
   const handleCheckboxChange = (questionId, option) => {
     setAnswers({
       ...answers,
@@ -28,13 +37,32 @@ const Quiz = () => {
     });
   };
 
+  const getUserId = () => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      try {
+        const decodedToken = jwtDecode(token);
+        const userId = decodedToken.userId;
+        return userId;
+      } catch (error) {
+        console.error('Error decoding token:', error);
+      }
+    }
+    return null;
+  };
+
   const handleSubmit = async () => {
     try {
-      const userId = 1; // Replace with actual user ID
-      const formattedAnswers = Object.keys(answers).map(questionId => ({
-        questionId: parseInt(questionId),
-        answer: answers[questionId]
-      }));
+      const userId = getUserId();
+      const formattedAnswers = Object.keys(answers).map(questionId => {
+        const question = questions.find(q => q._id === questionId);
+        return {
+          questionId: questionId,
+          answer: answers[questionId],
+          tags: question ? question.tags.join(', ') : ''
+        };
+      });
+
       const response = await axios.post('http://localhost:5000/api/quiz/submit', { userId, answers: formattedAnswers });
       setResult(response.data);
     } catch (error) {
@@ -44,7 +72,16 @@ const Quiz = () => {
 
   const currentQuestion = questions[currentQuestionIndex];
 
+  let totalCorrectAnswers = 0;
+  Object.keys(answers).forEach(questionId => {
+    const question = questions.find(q => q._id === questionId);
+    if (question && answers[questionId] === question.correctAnswer) {
+      totalCorrectAnswers++;
+    }
+  });
+
   if (result) {
+    const totalQuestionsAttempted = Object.keys(answers).length;
     return (
       <div className="container my-5">
         <div className="card">
@@ -52,8 +89,14 @@ const Quiz = () => {
             <h2 className="card-title">Quiz Result</h2>
           </div>
           <div className="card-body">
-            <p>Score: {result.correctAnswers} / {result.totalQuestions}</p>
+            <p>Score: {totalCorrectAnswers} / {totalQuestionsAttempted}</p>
           </div>
+          <a href="/dashboard" className="btn btn-primary">
+            Back to Dashboard
+          </a>
+          <button onClick={handleSignout} className="btn btn-danger">
+            Sign out
+          </button>
         </div>
       </div>
     );
@@ -79,9 +122,9 @@ const Quiz = () => {
                     <input
                       className="form-check-input"
                       type="radio"
-                      name={`question-${currentQuestion.id}`}
-                      checked={answers[currentQuestion.id] === option}
-                      onChange={() => handleCheckboxChange(currentQuestion.id, option)}
+                      name={`question-${currentQuestion._id}`}
+                      checked={answers[currentQuestion._id] === option}
+                      onChange={() => handleCheckboxChange(currentQuestion._id, option)}
                     />
                     <label className="form-check-label">{option}</label>
                   </div>

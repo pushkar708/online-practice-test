@@ -5,6 +5,7 @@ const QuestionSchema = new Schema({
   question: String,
   options: [String],
   answer: String,
+  correctAnswer: String,
   difficulty: Number,
   tags: [String]
 });

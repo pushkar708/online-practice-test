@@ -1,11 +1,16 @@
-const db = require('../config/db.json');
+const User = require('../models/User');
 
-const isAdmin = (req, res, next) => {
-  const user = db.users.find(u => u.id === req.body.userId);
-  if (user && user.role === 'admin') {
-    next();
-  } else {
-    res.status(403).json({ message: 'Access denied' });
+const isAdmin = async (req, res, next) => {
+  try {
+    const user = await User.findById(req.body.userId);
+    if (user && user.role === 'admin') {
+      next();
+    } else {
+      res.status(403).json({ message: 'Access denied' });
+    }
+  } catch (error) {
+    console.error('Error checking user role:', error);
+    res.status(500).json({ message: 'Internal server error' });
   }
 };
 

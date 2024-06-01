@@ -26,6 +26,10 @@ const Dashboard = () => {
     return <p>Loading...</p>;
   }
 
+  const viewResults = () => {
+    navigate('/dashboard/results');
+  };
+
   return (
     <div className="container my-5">
       <div className="card">
@@ -39,9 +43,14 @@ const Dashboard = () => {
               Sign out
             </button>
             {user.role !== 'admin' && (
-              <button onClick={handleStartQuiz} className="btn btn-primary">
-                Start Quiz
-              </button>
+              <>
+                <button onClick={handleStartQuiz} className="btn btn-primary">
+                  Start Quiz
+                </button>
+                <button onClick={viewResults} className="btn btn-secondary">
+                  View Results
+                </button>
+              </>
             )}
           </div>
         </div>
