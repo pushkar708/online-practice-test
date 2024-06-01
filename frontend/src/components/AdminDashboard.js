@@ -83,13 +83,13 @@ const AdminDashboard = () => {
             </div>
             <div className="card-body">
               <form>
-                <div className="form-group">
+                <div className="form-group d-flex">
                   <label className="form-label margin-r-2 label-admin">Question:</label>
                   <input type="text" className="form-control" placeholder="Question" value={newQuestion.question} onChange={(e) => setNewQuestion({ ...newQuestion, question: e.target.value })} />
                 </div>
                 {newQuestion.options.map((option, index) => (
                   <div key={index} className="form-group d-flex">
-                    <label className="form-label label-admin">Option {index + 1}:</label>
+                    <label className="form-label label-admin margin-r-2">Option {index + 1}:</label>
                     <input type="text" className="form-control  margin-r-2 label-admin" placeholder={`Option ${index + 1}`} value={option} onChange={(e) => {
                       const options = [...newQuestion.options];
                       options[index] = e.target.value;

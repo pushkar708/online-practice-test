@@ -56,38 +56,48 @@
       "tags": ["Geography"],
       "difficulty": 1,
       "id": 2
-  },
-  {
-    "question": "Which planet is known as the Red Planet?",
-    "options": ["Mars", "Venus", "Jupiter", "Saturn"],
-    "correctAnswer": "Mars",
-    "tags": ["Science"],
-    "difficulty": 1,
-    "id": 3
-},
-{
-  "question": "Who wrote 'To Kill a Mockingbird'?",
-  "options": ["Harper Lee", "Mark Twain", "J.K. Rowling", "Ernest Hemingway"],
-  "correctAnswer": "Harper Lee",
-  "tags": ["Literature"],
-  "difficulty": 2,
-  "id": 4
-},{
-  "question": "What is the smallest prime number?",
-  "options": ["1", "2", "3", "5"],
-  "correctAnswer": "2",
-  "tags": ["Mathematics"],
-  "difficulty": 1,
-  "id": 5
-},{
-  "question": "Who was the first President of the United States?",
-  "options": ["George Washington", "Abraham Lincoln", "Thomas Jefferson", "John Adams"],
-  "correctAnswer": "George Washington",
-  "tags": ["History"],
-  "difficulty": 1,
-  "id": 6
-}
-
-  
+    },
+    {
+      "question": "Which planet is known as the Red Planet?",
+      "options": ["Mars", "Venus", "Jupiter", "Saturn"],
+      "correctAnswer": "Mars",
+      "tags": ["Science"],
+      "difficulty": 2,
+      "id": 3
+    },
+    {
+      "question": "Who wrote 'To Kill a Mockingbird'?",
+      "options": [
+        "Harper Lee",
+        "Mark Twain",
+        "J.K. Rowling",
+        "Ernest Hemingway"
+      ],
+      "correctAnswer": "Harper Lee",
+      "tags": ["Literature"],
+      "difficulty": 2,
+      "id": 4
+    },
+    {
+      "question": "What is the smallest prime number?",
+      "options": ["1", "2", "3", "5"],
+      "correctAnswer": "2",
+      "tags": ["Mathematics"],
+      "difficulty": 1,
+      "id": 5
+    },
+    {
+      "question": "Who was the first President of the United States?",
+      "options": [
+        "George Washington",
+        "Abraham Lincoln",
+        "Thomas Jefferson",
+        "John Adams"
+      ],
+      "correctAnswer": "George Washington",
+      "tags": ["History"],
+      "difficulty": 1,
+      "id": 6
+    }
   ]
 }
