@@ -5,7 +5,11 @@ const Result = require('../models/Result');
 // Define route handler for starting the quiz
 exports.startQuiz = async (req, res) => {
   try {
-    const questions = await Question.find();
+    // Get a random sample of 20 questions
+    const questions = await Question.aggregate([
+      { $sample: { size: 20 } }
+    ]);
+
     res.status(200).json(questions);
   } catch (error) {
     console.error('Error fetching questions:', error);

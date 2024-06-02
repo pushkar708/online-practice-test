@@ -20,6 +20,10 @@ const AdminDashboard = () => {
     }
   }, [activeTab]);
 
+  function toTitleCase(str) {
+    return str.replace(/\b\w/g, (char) => char.toUpperCase());
+  }
+
   const handleSignout = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
@@ -65,6 +69,7 @@ const AdminDashboard = () => {
     }
     setEditedQuestions({ ...editedQuestions, [id]: updatedQuestion });
   };
+  
 
   const handleSaveChanges = async () => {
     try {
@@ -200,9 +205,9 @@ const AdminDashboard = () => {
         <div className={`tab-pane fade ${activeTab === 'results' ? 'show active' : 'fade'}`} id="results">
         <div className="card">
           <div className="card-header">
-            <h3 className="card-title">Quiz Results</h3>
+            <h3 className="card-title">User Statistics</h3>
           </div>
-          <div className="card-body">
+          <div className="card-body"> 
             <table className="table">
               <thead>
                 <tr>
@@ -216,7 +221,7 @@ const AdminDashboard = () => {
                 {results.map((result, index) => (
                   <tr key={index}>
                     <td>{result.email}</td>
-                    <td>{result.tag}</td>
+                    <td>{toTitleCase(result.tag)}</td>
                     <td>{result.totalQuestions}</td>
                     <td>{result.correctAnswers}</td>
                   </tr>
