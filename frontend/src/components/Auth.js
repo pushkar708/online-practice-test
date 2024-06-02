@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Google from './Google.component';
 
 const Auth = () => {
   const [email, setEmail] = useState('');
@@ -72,6 +73,7 @@ const Auth = () => {
         <button onClick={() => setIsLogin(!isLogin)} className="btn btn-link">
           {isLogin ? 'Switch to Signup' : 'Switch to Login'}
         </button>
+        <Google />
       </div>
     </div>
   );

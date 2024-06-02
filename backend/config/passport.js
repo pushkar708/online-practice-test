@@ -1,33 +1,28 @@
-const GoogleStrategy = require('passport-google-oauth20').Strategy;
-const mongoose = require('mongoose');
-const keys = require('./keys');
-const User = mongoose.model('users');
+var passport = require("passport");
+var GoogleStrategy = require("passport-google-oauth").OAuth2Strategy;
 
-module.exports = function(passport) {
-  passport.use(
-    new GoogleStrategy(
-      {
-        clientID: keys.googleClientID,
-        clientSecret: keys.googleClientSecret,
-        callbackURL: '/auth/google/callback'
-      },
-      (accessToken, refreshToken, profile, done) => {
-        User.findOne({ googleID: profile.id }).then(user => {
-          if (user) {
-            done(null, user);
-          } else {
-            new User({ googleID: profile.id }).save().then(user => done(null, user));
-          }
-        });
-      }
-    )
-  );
+// Google OAuth code
 
-  passport.serializeUser((user, done) => {
-    done(null, user.id);
-  });
-
-  passport.deserializeUser((id, done) => {
-    User.findById(id).then(user => done(null, user));
-  });
-};
+passport.serializeUser(function(user, done) {
+ done(null, user);
+});
+passport.deserializeUser(function(user, done) {
+ done(null, user);
+});
+passport.use(
+ new GoogleStrategy(
+  {
+   clientID: "54840836267-8k94rdoo01o5barchm8akbvu7tkku07b.apps.googleusercontent.com",
+   clientSecret: "P_EHI-Ms2iiI--qCwfyXmU06",
+   callbackURL: "https://accounts.google.com/o/oauth2/auth"
+  },
+  function(accessToken, refreshToken, profile, done) {
+   var userData = {
+    email: profile.emails[0].value,
+    name: profile.displayName,
+    token: accessToken
+   };
+   done(null, userData);
+  }
+ )
+);
